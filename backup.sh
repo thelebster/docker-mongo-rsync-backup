@@ -14,9 +14,9 @@ FILENAME=$DATE.gz
   --password $MONGODB_PASSWORD \
   --authenticationDatabase $MONGODB_AUTH_DATABASE \
   --gzip \
-  --archive=$DOCKER_PATH/$FILENAME > /proc/1/fd/1
+  --archive=$DOCKER_PATH/$FILENAME 2>&1
 
 /usr/bin/rsync -avzh --info=progress2 \
-  -e 'ssh -p23 -i private-key -o StrictHostKeychecking=no' \
+  -e 'ssh -p23 -i /private-key -o StrictHostKeychecking=no' \
   $DOCKER_PATH/$FILENAME \
-  $SFTP_SERVER:$SFTP_PATH/$FILENAME > /proc/1/fd/1
+  $SFTP_SERVER:$SFTP_PATH/$FILENAME 2>&1
