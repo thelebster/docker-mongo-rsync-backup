@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+
+  mongo-rsync-backup:
+    build: .
+    environment:
+      - MONGODB_DATABASE=${MONGODB_DATABASE}
+      - MONGODB_HOST=${MONGODB_HOST}
+      - MONGODB_PORT=${MONGODB_PORT}
+      - MONGODB_USERNAME=${MONGODB_USERNAME}
+      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
+      - MONGODB_AUTH_DATABASE=${MONGODB_AUTH_DATABASE}
+      - HOST_PATH=${HOST_PATH}
+      - DOCKER_PATH=${DOCKER_PATH}
+      - SFTP_SERVER=${SFTP_SERVER}
+      - SFTP_PATH=${SFTP_PATH}
+    hostname: mongo-rsync-backup
+    restart: always
+    # Uncomment if runs on the same host and you will be able to access mongo on 127.0.0.1:27017
+    network_mode: "host"
+    volumes:
+      - ${HOST_PATH}:${DOCKER_PATH}
+      - ${SFTP_PRIVATE_KEY_PATH}:/private-key:ro
