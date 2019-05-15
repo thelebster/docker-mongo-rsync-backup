@@ -6,7 +6,11 @@ RUN apk add --no-cache bash curl openssh sshpass rsync mongodb-tools
 
 COPY backup.sh /
 
+COPY cleanup.sh /
+
 RUN chmod +x /backup.sh
+
+RUN chmod +x /cleanup.sh
 
 # Add crontab file in the cron directory
 COPY crontab /crontab
